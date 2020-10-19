@@ -45,7 +45,4 @@ failing = KubernetesPodOperator(namespace='default',
 end = DummyOperator(task_id='end', dag=dag)
 
 
-passing.set_upstream(start)
-failing.set_upstream(start)
-passing.set_downstream(end)
-failing.set_downstream(end)
+start >> [passing,failing] >> end
